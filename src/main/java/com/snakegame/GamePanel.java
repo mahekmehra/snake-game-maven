@@ -27,10 +27,10 @@ public class GamePanel extends JPanel implements ActionListener {
     Timer timer;
     Random random;
 
-    // --- Obstacles ---
+    
     Rectangle[] obstacles;
 
-    // --- Play Again Button ---
+   
     Rectangle playAgainButton = new Rectangle(200, 350, 200, 50);
 
     public GamePanel() {
@@ -55,7 +55,7 @@ public class GamePanel extends JPanel implements ActionListener {
         startGame();
     }
 
-    // Obstacles Setup
+   
     public void initObstacles() {
         obstacles = new Rectangle[]{
             new Rectangle(200, 200, 50, 50),
@@ -150,7 +150,7 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    // Collision check with obstacles
+    
     public void checkObstacleCollision() {
         Rectangle head = new Rectangle(x[0], y[0], UNIT_SIZE, UNIT_SIZE);
 

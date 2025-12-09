@@ -24,7 +24,7 @@
     <build>
         <plugins>
 
-            <!-- 1. Compiler Plugin (Required for Java Version) -->
+            <!-- Compiler Plugin  -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -35,7 +35,7 @@
                 </configuration>
             </plugin>
 
-            <!-- 2. JAR Plugin (To make executable JAR) -->
+            <!-- JAR Plugin   -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>

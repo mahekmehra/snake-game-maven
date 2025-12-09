@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write   # REQUIRED for creating GitHub releases
+  contents: write   
 
 jobs:
   build:
