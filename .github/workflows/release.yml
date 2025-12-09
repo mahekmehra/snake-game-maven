@@ -6,6 +6,9 @@ on:
       - 'v*.*.*'
   workflow_dispatch:
 
+permissions:
+  contents: write   # REQUIRED for creating GitHub releases
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -44,5 +47,6 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         files: "*.jar"
+        overwrite_files: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
