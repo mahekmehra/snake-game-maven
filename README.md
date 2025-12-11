@@ -41,8 +41,8 @@ snake-game/
 │   ├── main/java/com/snakegame/
 │   │      ├── GameFrame.java
 │   │      ├── GamePanel.java
-│   │      ├── SnakeGame.java
-│   │      ├── Obstacle.java
+│   │      ├── App.java
+│   │     
 │   ├── test/java/...
 │
 │── target/ (generated)
