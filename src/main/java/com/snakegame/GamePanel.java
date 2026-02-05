@@ -183,7 +183,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         g.setColor(Color.red);
         g.setFont(new Font("Ink Free", Font.BOLD, 60));
-        g.drawString("Game Over !!", 150, 200);
+        g.drawString("Game Over!", 150, 200);
 
         g.setFont(new Font("Ink Free", Font.BOLD, 30));
         g.setColor(Color.white);
