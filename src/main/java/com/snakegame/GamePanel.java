@@ -21,6 +21,7 @@ public class GamePanel extends JPanel implements ActionListener {
     int applesEaten;
     int appleX;
     int appleY;
+    int highScore = 0;
 
     char direction = 'R';
     boolean running = false;
@@ -51,6 +52,7 @@ public class GamePanel extends JPanel implements ActionListener {
             }
         });
 
+        highScore = HighScoreManager.getHighScore();
         initObstacles();
         startGame();
     }
@@ -117,6 +119,7 @@ public class GamePanel extends JPanel implements ActionListener {
             g.setColor(Color.white);
             g.setFont(new Font("Ink Free", Font.BOLD, 30));
             g.drawString("Score: " + applesEaten, 10, 30);
+            g.drawString("High Score: " + highScore, 10, 60);
 
         } else {
             gameOver(g);
@@ -146,6 +149,10 @@ public class GamePanel extends JPanel implements ActionListener {
         if ((x[0] == appleX) && (y[0] == appleY)) {
             bodyParts++;
             applesEaten++;
+            if (applesEaten > highScore) {
+                highScore = applesEaten;
+                HighScoreManager.setHighScore(highScore);
+            }
             newApple();
         }
     }
@@ -188,6 +195,7 @@ public class GamePanel extends JPanel implements ActionListener {
         g.setFont(new Font("Ink Free", Font.BOLD, 30));
         g.setColor(Color.white);
         g.drawString("Score: " + applesEaten, 240, 260);
+        g.drawString("High Score: " + highScore, 210, 300);
 
         // Play Again Button
         g.setColor(Color.white);
