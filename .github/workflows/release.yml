@@ -1,30 +1,29 @@
-name: Build & Release Snake Game
+name: Build and Release
 
 on:
   push:
     tags:
-      - 'v*.*.*'
-  workflow_dispatch:
+      - "v*"
 
 permissions:
-  contents: write   
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Set up JDK
+    - name: Set up Java
       uses: actions/setup-java@v4
       with:
-        java-version: '25'
         distribution: 'temurin'
+        java-version: '17'
 
     - name: Build with Maven
-      run: mvn -B clean package
+      run: mvn clean package
 
     - name: Upload JAR Artifact
       uses: actions/upload-artifact@v4
@@ -32,21 +31,21 @@ jobs:
         name: snake-game-jar
         path: target/*.jar
 
-  release:
-    needs: build
-    runs-on: ubuntu-latest
+   
+    - name: Build Docker Image
+      run: docker build -t snake-game .
 
-    steps:
-    - name: Download built JAR
-      uses: actions/download-artifact@v4
-      with:
-        name: snake-game-jar
-        path: .
+    - name: Save Docker Image
+      run: docker save snake-game > snake-game.tar
 
-    - name: Create GitHub Release
-      uses: softprops/action-gh-release@v2
+    - name: Upload Docker Image
+      uses: actions/upload-artifact@v4
       with:
-        files: "*.jar"
-        overwrite_files: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        name: docker-image
+        path: snake-game.tar
+
+    # 🚀 CREATE GITHUB RELEASE
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: target/*.jar
