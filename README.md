@@ -1,35 +1,41 @@
-# 🐍 Snake Game (Java) – Maven Build + GitHub Actions CI/CD
+# 🐍 Snake Game (Java) – Maven + GitHub Actions CI/CD + Docker
 
 This project is a classic **Snake Game** built using **Java Swing**, enhanced with:
 
-- Modernized UI
-- Obstacles on the board
-- "Play Again" option after Game Over
-- Maven project structure
-- Automated JAR building using GitHub Actions
-- Automated GitHub Release publishing
+* Modernized UI
+* Obstacles on the board
+* "Play Again" option after Game Over
+* Maven project structure
+* Automated JAR building using GitHub Actions
+* Automated GitHub Release publishing
+* **Docker containerization for consistent deployment**
 
-This project demonstrates **core Java**, **Maven**, **Git**, and **CI/CD automation**.
+This project demonstrates **core Java**, **Maven**, **Git**, **CI/CD automation**, and **Docker-based containerization**.
 
 ---
 
 ## 📌 Features
 
 ### 🎮 Game Features
-- Smooth snake movement (arrow keys)
-- Food spawning & score counting
-- Random obstacles
-- Game Over dialog with **Play Again**
-- Clean, simple UI
+
+* Smooth snake movement (arrow keys)
+* Food spawning & score counting
+* Random obstacles
+* Game Over dialog with **Play Again**
+* Clean, simple UI
+* Persistent **High Score tracking**
 
 ### 🛠 Technical Features
-- Built using **Maven (Packaging: JAR)**
-- Automated CI/CD pipeline:
-  - Maven build on tag push
-  - Artifact upload
-  - Automatic GitHub Release
-- Uses Java 17
-- Cross-platform runnable JAR
+
+* Built using **Maven (Packaging: JAR)**
+* Automated CI/CD pipeline:
+
+  * Maven build on tag push
+  * Artifact upload
+  * Automatic GitHub Release
+* Docker containerization using **multi-stage build**
+* Uses Java 17
+* Cross-platform runnable JAR
 
 ---
 
@@ -41,12 +47,14 @@ snake-game/
 │   ├── main/java/com/snakegame/
 │   │      ├── GameFrame.java
 │   │      ├── GamePanel.java
+│   │      ├── HighScoreManager.java
 │   │      ├── App.java
-│   │     
+│   │
 │   ├── test/java/...
 │
 │── target/ (generated)
 │── pom.xml
+│── Dockerfile
 │── .github/workflows/release.yml
 │── README.md
 ```
@@ -55,7 +63,8 @@ snake-game/
 
 ## 🚀 How to Run the Game
 
-### **1. Run using JAR file**
+### ▶️ Run using JAR file
+
 After build or release:
 
 ```
@@ -68,36 +77,72 @@ If using Windows, double-click the JAR.
 
 ## 🧪 Running Locally
 
-### Build JAR manually:
+### 🔹 Build JAR manually:
+
 ```
 mvn clean package
 ```
 
-### Run:
+### 🔹 Run:
+
 ```
 java -jar target/*.jar
 ```
 
 ---
 
+## 🐳 Docker Integration
+
+This project is containerized using Docker to ensure **consistent build and runtime environments**.
+
+### 🔹 Build Docker Image
+
+```
+docker build -t snake-game .
+```
+
+### 🔹 Run Docker Container
+
+```
+docker run snake-game
+```
+
+⚠️ Note:
+Since this is a **Java Swing GUI application**, the game window will not display inside the Docker container.
+However, the container successfully executes the application, demonstrating proper containerization.
+
+### 🔹 Multi-stage Docker Build
+
+* Uses Maven image to build the project
+* Uses lightweight Java image to run the JAR
+* Reduces final image size
+
+---
+
 ## 🔧 CI/CD Pipeline (GitHub Actions)
 
-A workflow is stored in:
+Workflow location:
 
 ```
 .github/workflows/release.yml
 ```
 
-It performs:
+### 🔄 Pipeline Steps
 
-✔ Checkout repository  
-✔ Install Java  
-✔ Build with Maven  
-✔ Upload artifact  
-✔ Create GitHub Release  
-✔ Attach JAR to release  
+✔ Checkout repository
+✔ Setup Java 17
+✔ Build using Maven
+✔ Generate JAR file
+✔ Build Docker image
+✔ Save Docker image as artifact
+✔ Upload artifacts (JAR + Docker image)
+✔ Create GitHub Release
 
-Triggered when you push a tag like:
+---
+
+### ▶️ Trigger Pipeline
+
+Push a version tag:
 
 ```
 git tag v1.0.0
@@ -106,16 +151,26 @@ git push origin v1.0.0
 
 ---
 
+## 📦 Artifacts Generated
+
+Each release contains:
+
+* ✅ Executable JAR file
+* ✅ Docker image (`.tar`)
+* ✅ Automated GitHub release
+
+---
 
 ## 🧩 Technologies Used
 
-- **Java 17**
-- **Maven**
-- **Git & GitHub**
-- **GitHub Actions**
-- **Swing (UI)**
-- **CI/CD Automation**
-- **Semantic Versioning**
+* **Java 17**
+* **Maven**
+* **Git & GitHub**
+* **GitHub Actions**
+* **Docker**
+* **Swing (UI)**
+* **CI/CD Automation**
+* **Semantic Versioning**
 
 ---
 
@@ -123,45 +178,50 @@ git push origin v1.0.0
 
 By building this project, I learned:
 
-### 🔹 **DevOps Concepts**
-- Automation pipelines  
-- GitHub Actions workflows  
-- Artifact uploading/downloading  
-- Release automation  
-- Debugging CI/CD errors  
+### 🔹 DevOps Concepts
 
-### 🔹 **Maven Concepts**
-- POM structure  
-- Managing dependencies  
-- Build lifecycle  
-- Generating executable JAR  
-- Maven plugins  
+* CI/CD pipelines
+* GitHub Actions workflows
+* Docker containerization
+* Multi-stage builds
+* Artifact management
+* Release automation
 
-### 🔹 **Git/GitHub**
-- Branching & commits  
-- Writing professional commit messages  
-- Working with tags  
-- Publishing releases  
-- Repo structure best practices  
+### 🔹 Maven Concepts
 
-### 🔹 **Java Development**
-- Swing UI  
-- Event listeners  
-- Game loop  
-- Java object-oriented design  
-- Packaging applications  
+* POM structure
+* Dependency management
+* Build lifecycle
+* Executable JAR generation
+* Maven plugins
+
+### 🔹 Git/GitHub
+
+* Version control
+* Tag-based releases
+* Repository structuring
+* CI/CD integration
+
+### 🔹 Java Development
+
+* Swing UI
+* Event-driven programming
+* Game loop logic
+* Object-oriented design
+* File handling (High Score persistence)
 
 ---
 
 ## 📦 Final Output
 
-- A fully working Snake Game  
-- A Maven-built runnable JAR  
-- Fully automated CI/CD pipeline  
-- Professional release publishing  
+* Fully working Snake Game
+* Maven-built executable JAR
+* Docker containerized application
+* Automated CI/CD pipeline
+* GitHub Releases with artifacts
 
 ---
 
 ## 👤 Author
 
-Mahek Mehra – 2025  
+**Mahek Mehra – 2025**
