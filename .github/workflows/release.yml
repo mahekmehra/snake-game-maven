@@ -44,7 +44,7 @@ jobs:
         name: docker-image
         path: snake-game.tar
 
-    # 🚀 CREATE GITHUB RELEASE
+    # CREATE GITHUB RELEASE
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
